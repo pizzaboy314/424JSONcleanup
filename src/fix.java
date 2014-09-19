@@ -8,7 +8,7 @@ import java.util.List;
 
 
 public class fix {
-	List<Feature> list = new ArrayList<Feature>();
+	public static List<Feature> list = new ArrayList<Feature>();
 
 	public static void main(String[] args) {
 		
@@ -37,7 +37,21 @@ public class fix {
 		String fname = name.replaceAll("\"name\": \"|\",", "");
 		String fslug = slug.replaceAll("\"slug\": \"|\",", "");
 		
-		
+		String tmp[] = dims.split(":");
+
+		String ftype = tmp[2].replaceAll("\",\"coordinates\"|\"", "");
+
+		String stmp = tmp[3].replace("}", "");
+		String coordinates[] = stmp.replaceAll("\\[\\[\\[|\\]\\]\\]", "").replaceAll("\\],\\[", "]:[").split(":");
+		for (int i = 0; i < coordinates.length; i++) {
+			String vals[] = coordinates[i].replaceAll("\\[|\\]", "").split(",");
+			feat.addCoordinate(Float.parseFloat(vals[0]), Float.parseFloat(vals[1]));
+		}
+
+		feat.setName(fname);
+		feat.setSlug(fslug);
+		feat.setType(ftype);
+		list.add(feat);
 	}
 
 	public static String readFile(String path, Charset encoding) throws IOException {

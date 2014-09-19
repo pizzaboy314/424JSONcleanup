@@ -6,8 +6,8 @@ public class FloatPoint {
 	public float y;
 	
 	public FloatPoint(float x, float y){
-		x = this.x;
-		y = this.y;
+		this.x = x;
+		this.y = y;
 	}
 	
 	public float getY() {
