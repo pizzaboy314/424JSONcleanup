@@ -53,4 +53,8 @@ public class Feature {
 		this.type = type;
 	}
 
+	public List<FloatPoint> getCoordinates() {
+		return coordinates;
+	}
+
 }
