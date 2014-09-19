@@ -16,7 +16,7 @@ public class fix {
 		String test = "";
 		
 		try {
-			test = readFile("testmap.json", StandardCharsets.UTF_8);
+			test = readFile("everyblock-neighborhoods-chicago.json", StandardCharsets.UTF_8);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
