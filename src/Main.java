@@ -16,7 +16,7 @@ public class Main {
 		String test = "";
 		
 		try {
-			test = readFile("testmap.json", StandardCharsets.UTF_8);
+			test = readFile("everyblock-neighborhoods-chicago.json", StandardCharsets.UTF_8);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -46,20 +46,10 @@ public class Main {
 			s.append("\"},\"geometry\":{\"type\":\"");
 			s.append(f.getType());
 			
-			s.append("\",\"coordinates\":[[");
+			s.append("\",\"coordinates\":");
 			
-			List<FloatPoint> dims = f.getCoordinates();
-			int j=0;
-			for(FloatPoint fp : dims){
-				s.append("[" + fp.getX() + "," + fp.getY() + "]");
-				if(j>=dims.size()-1){
-					s.append("]]}}");
-				} else {
-					s.append(",");
-				}
-				j++;
-			}
-			if(i < list.size()){
+			s.append(f.getCoordinates() + "}}");
+			if (i < list.size()) {
 				s.append(",");
 			}
 			s.append("\n");
@@ -87,16 +77,12 @@ public class Main {
 
 		String ftype = tmp[2].replaceAll("\",\"coordinates\"|\"", "");
 
-		String stmp = tmp[3].replace("}", "");
-		String coordinates[] = stmp.replaceAll("\\[\\[\\[|\\]\\]\\]", "").replaceAll("\\],\\[", "]:[").split(":");
-		for (int i = 0; i < coordinates.length; i++) {
-			String vals[] = coordinates[i].replaceAll("\\[|\\]", "").split(",");
-			feat.addCoordinate(Float.parseFloat(vals[0]), Float.parseFloat(vals[1]));
-		}
+		String coordinates = tmp[3].replace("}", "");
 
 		feat.setName(fname);
 		feat.setSlug(fslug);
 		feat.setType(ftype);
+		feat.setCoordinates(coordinates);
 		list.add(feat);
 	}
 

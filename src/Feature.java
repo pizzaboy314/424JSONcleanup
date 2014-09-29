@@ -1,17 +1,13 @@
-import java.awt.Point;
-import java.util.ArrayList;
-import java.util.List;
 
 
 public class Feature {
 	public String name = "Name";
 	public String slug = "name";
 	public String type = "MultiPolygon";
-	public List<FloatPoint> coordinates; 
+	public String coordinates = "";
 	
 	
 	public Feature(){
-		coordinates = new ArrayList<FloatPoint>();
 		
 	}
 
@@ -19,10 +15,6 @@ public class Feature {
 		return name + "\n" + slug + "\n" + type + "\n" + coordinates;
 	}
 	
-	public void addCoordinate(float x, float y){
-		FloatPoint fp = new FloatPoint(x, y);
-		coordinates.add(fp);
-	}
 
 	public String getName() {
 		return name;
@@ -53,8 +45,12 @@ public class Feature {
 		this.type = type;
 	}
 
-	public List<FloatPoint> getCoordinates() {
+	public String getCoordinates() {
 		return coordinates;
+	}
+
+	public void setCoordinates(String coordinates) {
+		this.coordinates = coordinates;
 	}
 
 }
